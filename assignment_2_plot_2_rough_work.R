@@ -221,7 +221,7 @@ spgglt1<-ggplot(fips_added, aes(year, (sum_by_year),fips_name)) +
   coord_cartesian() +
   ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
-  ylab("log of Total emission from vehicle Based Sources")+
+  ylab("Total emission from \nvehicle Based Sources")+
   theme_bw() ##substantaill fall
 
 plot(spgglt1)
@@ -260,7 +260,7 @@ spggplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, (lagging_sum_by_year),fip
   coord_cartesian() +
   ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \n for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
-  ylab("log of Total emission - previous years emssions \nfrom vehicle Based Sources")+
+  ylab("Total emission \n- previous years emssions \nfrom vehicle Based Sources")+
   theme_bw() ##substantaill fall
 
 plot(spggplt2)
@@ -269,17 +269,17 @@ plot(spggplt2)
 
 ##facet plt
 
-ggplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, lagging_sum_by_year)) +
+ggsplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, lagging_sum_by_year)) +
   geom_point()+  
   geom_smooth(method="loess") +
   coord_cartesian() +
   ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \nfor each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
-  ylab("log of Total emission - previous years emssions \nfrom vehicle Based Sources")+
+  ylab("Total emission \n- previous \nyears emssions \nfrom vehicle \nBased Sources")+
   theme_bw() ##substantaill fall
 
 
-ggplt2+facet_grid(fips_name ~.)
+ggsplt2+facet_grid(fips_name ~.)
 
 ??plot_grid
 
