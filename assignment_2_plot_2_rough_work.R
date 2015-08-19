@@ -1,5 +1,5 @@
 ##some usefull links
-
+##peter brennan
 ##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 ##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 ##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
