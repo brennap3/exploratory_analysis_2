@@ -61,11 +61,9 @@ emissions.by.year.coal<-NEI %>% filter(SCC %in% SCC.Coal.MAGRIT ) %>% group_by(y
 
 emissions.by.year.coal
 
-ggplot4<-ggplot(emissions.by.year.coal, aes(year, sum_by_year,type)) +
-  geom_point()+  
-  geom_smooth(method="loess") +
-  coord_cartesian() +
-  ggtitle("Total emission from Coal Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 by type")+
+ggplot4<-ggplot(emissions.by.year.coal, aes(factor(year), sum_by_year)) +
+  geom_bar(stat="identity")+
+  ggtitle("Total emission from Coal Based Sources for each of the \nyears 1999, 2002, 2005, and 2008")+
   xlab("Year")+
   ylab("Total emission from Coal Based Sources")+
   theme_bw()
@@ -74,4 +72,4 @@ plot(ggplot4)
 
 last_plot()
 
-ggsave("plot4_exploratory_analysis_2.png",width=5,height=5)
+ggsave("plot4v1_exploratory_analysis_2.png",width=5,height=5)

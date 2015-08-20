@@ -1,0 +1,75 @@
+---
+title: "xploratory analysis Assignment 2"
+author: "Peter Brennan"
+date: "Thursday, August 20, 2015"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+
+```
+
+Introduction
+
+Fine particulate matter (PM2.5) is an ambient air pollutant for which there is strong evidence that it is harmful to human health. In the United States, the Environmental Protection Agency (EPA) is tasked with setting national ambient air quality standards for fine PM and for tracking the emissions of this pollutant into the atmosphere. Approximatly every 3 years, the EPA releases its database on emissions of PM2.5. This database is known as the National Emissions Inventory (NEI). You can read more information about the NEI at the EPA National Emissions Inventory web site.
+
+For each year and for each type of PM source, the NEI records how many tons of PM2.5 were emitted from that source over the course of the entire year. The data that you will use for this assignment are for 1999, 2002, 2005, and 2008.
+
+
+Assignment Aims
+The aim of the assignment is to answer the following questions with the data:
+
+You must address the following questions and tasks in your exploratory analysis. For each question/task you will need to make a single plot. Unless specified, you can use any plotting system in R to make your plot.
+
+Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+
+Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? Which have seen increases in emissions from 1999-2008? Use the ggplot2 plotting system to make a plot answer this question.
+
+Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
+
+How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
+
+Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
+
+Types of data:
+
+The data we are dealing with is largely aggregated PM2.5 particulate matter summed by year and by different channel. As this data consists of :
+
+(A)largely aggregated PM2.5 particulate matter summed by year (continuous)
+(B) Year (ordinal)
+(C) By channel it was created (categorical) and by
+(d) by source of pollution (categorical)
+
+Tpes of graphs used:
+The most appropriate graph types todisplay this data are bar graphs however where multiple  data types are displayed on the same graph
+line type charts were used.
+
+
+Plot 1. Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+
+Type of graph Bar plot
+
+Answer From the graph it can be seen that from the 1999 to 2008 emissions have decreased
+
+PLot 2. Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+Type of graph barplot
+Answer Yes  they have except in 2005 where they rose after falling in 2002 from 1998, and again in 2008 showing a decline from 2005  and when coapred to 1998.
+
+
+
+Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? Which have seen increases in emissions from 1999-2008? Use the ggplot2 plotting system to make a plot answer this question.
+
+
+Ty
+``{r, echo=FALSE}
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
