@@ -1,5 +1,5 @@
 ---
-title: "exploratory_analysis_Assignment_2"
+title: "Exploratory analysis Assignment 2"
 author: "Peter Brennan"
 date: "Saturday, August 22, 2015"
 output: html_document
@@ -27,16 +27,21 @@ The aim of the assignment is to answer the following questions with the data. Th
 
 6. Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
 
+**Github repository**
+I created a github repository to hold all my code, please reference it here to see any plots and code.
+
+https://github.com/brennap3/exploratory_analysis_2
 
 **Types of Data**
 
-The data we are dealing with is on the whole aggregated PM 2.5 particulate matter summed by year and by different channel. As this data consists of :
+The data we are dealing with is on the whole aggregated PM 2.5 particulate matter summed by year and by different channel. As this data consists of:
 
 
 (A)largely aggregated PM2.5 particulate matter summed by year (Continuous)
 (B) Year (Discrete)
 (C) By channel it was created (Categorical)
-(d) by source of pollution (Categorical).
+(D) By source of pollution (Categorical).
+(E) By count code or Name
 
 
 **Tpes of graphs used:**
@@ -46,11 +51,11 @@ The most appropriate graph types todisplay this data are bar graphs however wher
 
 **Plot 1.** 
 
-Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+**Question:** Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
 
-Type of graph: Bar plot
+**Type of graph:** Bar plot.
 
-Answer: From the graph it can be seen that from the 1999 to 2008 emissions have decreased
+**Answer:** From the graph it can be seen that from the 1999 to 2008 emissions have decreased.
 
 ![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot1v1a_exploratory_analysis_2.png)
 
@@ -99,10 +104,10 @@ dev.off()
 
 **Plot 2.** 
 
-Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+**Question:** Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
 
-Type of graph barplot
-Answer Yes they have, they fell in 2002 (when compared to 1999), the exception is in 2005 (when compared to 2002) when they rose but fell back again in 2008 (when compared to 2005).
+**Type of graph:** barplot
+**Answer:** Yes they have, they fell in 2002 (when compared to 1999), the exception is in 2005 (when compared to 2002) when they rose but fell back again in 2008 (when compared to 2005).
 
 
 ![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot2v1a_exploratory_analysis_2.png)
@@ -154,14 +159,14 @@ dev.off()
 
 **Plot 3.**
 
-Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
+**Question:** Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
 Which have seen increases in emissions from 1999-2008? 
 
 Use the ggplot2 plotting system to make a plot answer this question.
 
-Type of chart grouped bar cahrt
+**Type of chart:** grouped bar chart, with colour.
 
-NONPOINT,NON-ROAD,ON-ROAD have fallen. Point has seen an increased from 1998 to 2008.
+**Answer:** NONPOINT,NON-ROAD,ON-ROAD have fallen. Point has seen an increased from 1998 to 2008.
 The interesting thing about point is that is has has risen every interval in yeat except for 2008 were it fell back from 2005. Though it has seen an overall increase from 1999 to 2008. This is best seen by looking at the individual values in a table 
 
   year|     type| Toal emission by year|
@@ -244,14 +249,13 @@ ggsave("plot3v1_exploratory_analysis_2.png",width=6,height=6)
 
 **Plot 4.**
 
-Across the United States, 
-how have emissions from coal combustion-related sources changed from 1999-2008?
+**Question:** Across the United States,how have emissions from coal combustion-related sources changed from 1999-2008?
 
-Type of plot Bar graph
+**Type of plot:** Bar graph
 
-Assumptions made: Where the EI.Sector is like coal these SC's will be used to designate coal combustion sources
+**Assumptions made: Where the EI.Sector is like coal these SC's will be used to designate coal combustion sources**
 
-Answer : Coal combustion sources have fallen from 1999 to 2008 however from 1998 to 2005 the values remained fairly steady but dramatically fell in 2008. This can be seen in both the table of values and the attached chart
+**Answer :** Coal combustion sources have fallen from 1999 to 2008 however from 1998 to 2005 the values remained fairly steady but dramatically fell in 2008. This can be seen in both the table of values and the attached chart
 
 Year | Emissions due to coal|
 ----------------------------|
@@ -345,13 +349,13 @@ ggsave("plot4v1_exploratory_analysis_2.png",width=5,height=5)
 
 **Plot 5.**
 
-Plot 5. How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
+**Question:** How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
 
-Assumptions: Any data row with category on raod is considered to pertain to a motor vehicle.
+**Assumptions: Any data row with category on raod is considered to pertain to a motor vehicle.**
 
-Chart Type: Bar graph
+**Chart Type:** Bar graph
 
-Total emissions in Baltimore fell from 1998 to 2008 for motor vehicles in baltimore. This be seen from the cahrt below.
+**Answer:** Total emissions in Baltimore fell from 1998 to 2008 for motor vehicles in baltimore. This be seen from the cahrt below.
 
 
 ![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot5v1_exploratory_analysis_2.png)
@@ -414,3 +418,162 @@ ggsave("plot5v1_exploratory_analysis_2.png",width=5,height=5)
 
 
 ```
+
+**Plot 6.**
+
+**Question :** Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
+
+**Assumptions: Any data row with category on raod is considered to pertain to a motor vehicle.**
+
+**Type of plot:** grouped bar graph 
+ 
+**Answer:** Baltimore shows a  very sizeable fall while la shows some increase.
+When a lag plot is plotted  you can see that Baltimore falls every year. While LA goes up year on year in 2002 and 2005 when compared to the previous year (1999 and 2002 respectively) while in 2008 LA falls dramatically compared to 2005.
+
+![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot6v4_exploratory_analysis_2.png)
+
+```{r, eval=FALSE}
+##PLot6
+
+##some usefull links
+
+##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(magrittr)
+library(sqldf)
+library(gridExtra)
+library(cowplot)
+
+## This first line will likely take a few seconds. Be patient!
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+str(SCC)
+summary(SCC)
+
+##6
+
+##Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources 
+##in Los Angeles County, California (fips == "06037"). 
+##Which city has seen greater changes over time in motor vehicle emissions?
+
+
+emissions.by.year.motor.vehicles.baltimore.la<-NEI %>% filter(fips %in% c("24510","06037")&type=="ON-ROAD") %>% group_by(year,fips) %>% summarize(sum_by_year=sum(Emissions)) %>% arrange(year) %>% data.frame
+
+str(emissions.by.year.motor.vehicles.baltimore.la)
+
+gpav1<-ggplot(emissions.by.year.motor.vehicles.baltimore.la, aes(factor(year), (sum_by_year),fips)) +
+  geom_bar(aes(fill=fips),stat="identity",position="dodge") +
+  ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
+  xlab("Year")+
+  ylab("Total emission from vehicle Based Sources")+
+  theme_bw() ##substantaill fall
+
+plot(gpav1)
+
+ggsave("plot6av1_exploratory_analysis_2.png",width=7,height=7)
+
+
+
+##6v1
+##lets add a legend
+library(car)
+?recode
+
+
+fips_name<-function(fips_code){
+  fips_nm<-ifelse(fips_code=="06037",'LA County','Baltimore')
+}
+
+test
+x<-fips_name('06037')
+
+
+
+
+fips_added<-cbind(mapply(fips_name,emissions.by.year.motor.vehicles.baltimore.la$fips),
+                  emissions.by.year.motor.vehicles.baltimore.la)
+
+colnames(fips_added)[1]<-"fips_name"
+
+str(fips_added)
+
+gpav2<-ggplot(fips_added, aes(factor(year), (sum_by_year),fips_name)) +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
+  ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
+  xlab("Year")+
+  ylab("log of Total emission from vehicle Based Sources")+
+  theme_bw() ##substantaill fall
+
+plot(gpav2)
+
+ggsave("plot6av2_exploratory_analysis_2.png",width=7,height=7)
+
+
+spgglt1<-ggplot(fips_added, aes(factor(year), (sum_by_year),fips_name)) +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
+  ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
+  xlab("Year")+
+  ylab("Total emission from \nvehicle Based Sources")+
+  theme_bw() ##substantaill fall
+
+plot(spgglt1)
+last_plot()
+
+?lag
+##get the laggin change or different cityies
+
+##6v4
+
+fips_added_lag_sum_by_year<-data.frame(rbind(filter(fips_added,fips_name=='LA County') %>% arrange(year) %>% dplyr::mutate(lagging_sum_by_year=ifelse(is.na(sum_by_year-lag(sum_by_year,k=1)),0,(sum_by_year-lag(sum_by_year,k=1))))
+                                             ,filter(fips_added,fips_name=='Baltimore') %>% arrange(year) %>% dplyr::mutate(lagging_sum_by_year=ifelse(is.na(sum_by_year-lag(sum_by_year,k=1)),0,(sum_by_year-lag(sum_by_year,k=1))))))
+
+
+spggplt2<-ggplot(fips_added_lag_sum_by_year, aes(factor(year), (lagging_sum_by_year),fips_name)) +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
+  ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \n for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
+  xlab("Year")+
+  ylab("Total emission \n- previous years emssions \nfrom vehicle Based Sources")+
+  theme_bw() ##substantaill fall
+
+plot(spggplt2)
+
+
+
+##facet plt
+
+ggsplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, lagging_sum_by_year)) +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
+  ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \nfor each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
+  xlab("Year")+
+  ylab("Total emission \n- previous \nyears emssions \nfrom vehicle \nBased Sources")+
+  theme_bw() ##substantaill fall
+
+
+ggsplt2+facet_grid(fips_name ~.)
+
+??plot_grid
+
+plot_grid(spgglt1,spggplt2, ncol=1,nrow=2)
+
+ggsave("plot6v4_exploratory_analysis_2.png",width=7,height=7) 
+
+```
+
+
+**Conclusions**
+
+All plots were created with the aprropriate graphics package, graph type based on the data types, use of multiple plots were aprropriate and all assumptions made were clearly stated.
+
+
+
