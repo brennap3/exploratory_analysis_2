@@ -41,7 +41,7 @@ emissions.by.year.motor.vehicles.baltimore<-NEI %>% filter(fips=="24510"&type=="
 
 ggplot5<-ggplot(emissions.by.year.motor.vehicles.baltimore, aes(factor(year), sum_by_year)) +
   geom_bar(stat="identity")+
-  ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in Baltimore")+
+  ggtitle("Total emission from \nMotor_Vehicle Based Sources \nfor each of the \nyears 1999, 2002, 2005, and 2008 in Baltimore")+
   xlab("Year")+
   ylab("Total emission from vehicle Based Sources")+
   theme_bw() ##substantaill fall

@@ -73,53 +73,26 @@ colnames(fips_added)[1]<-"fips_name"
 
 str(fips_added)
 
-ggplot(fips_added, aes(factor(year), (sum_by_year),fips_name)) +
+gpav2<-ggplot(fips_added, aes(factor(year), (sum_by_year),fips_name)) +
   geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
   ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("log of Total emission from vehicle Based Sources")+
   theme_bw() ##substantaill fall
 
-ggsave("plot6v2_exploratory_analysis_2.png",width=7,height=7)
+plot(gpav2)
 
-ggplot(fips_added, aes(year, (sum_by_year),fips_name)) +
-  geom_point(aes(shape = fips_name,colour=fips_name))+  
-  geom_smooth(aes(color=fips_name),method="loess") +
-  coord_cartesian() +
-  ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
-  xlab("Year")+
-  ylab("log of Total emission from vehicle Based Sources")+
-  theme_bw() ##substantaill fall
-
-ggsave("plot6v3_exploratory_analysis_2.png",width=7,height=7)
+ggsave("plot6av2_exploratory_analysis_2.png",width=7,height=7)
 
 
-spgglt1<-ggplot(fips_added, aes(year, (sum_by_year),fips_name)) +
-  geom_point(aes(shape = fips_name,colour=fips_name))+  
-  geom_smooth(aes(color=fips_name),method="loess") +
-  coord_cartesian() +
+spgglt1<-ggplot(fips_added, aes(factor(year), (sum_by_year),fips_name)) +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
   ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("Total emission from \nvehicle Based Sources")+
   theme_bw() ##substantaill fall
 
 plot(spgglt1)
-
-
-##or facet
-ggplt<-ggplot(fips_added, aes(year, log(sum_by_year))) +
-  geom_point()+  
-  geom_smooth(method="loess") +
-  coord_cartesian() +
-  ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
-  xlab("Year")+
-  ylab("log of Total emission from vehicle Based Sources")+
-  theme_bw() ##substantaill fall
-
-ggplt+facet_grid(fips_name ~.)
-
-
-
 last_plot()
 
 ?lag
@@ -130,13 +103,9 @@ last_plot()
 fips_added_lag_sum_by_year<-data.frame(rbind(filter(fips_added,fips_name=='LA County') %>% arrange(year) %>% dplyr::mutate(lagging_sum_by_year=ifelse(is.na(sum_by_year-lag(sum_by_year,k=1)),0,(sum_by_year-lag(sum_by_year,k=1))))
                                              ,filter(fips_added,fips_name=='Baltimore') %>% arrange(year) %>% dplyr::mutate(lagging_sum_by_year=ifelse(is.na(sum_by_year-lag(sum_by_year,k=1)),0,(sum_by_year-lag(sum_by_year,k=1))))))
 
-str(fips_added_lag_sum_by_year)
 
-
-spggplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, (lagging_sum_by_year),fips_name)) +
-  geom_point(aes(shape = fips_name,colour=fips_name))+  
-  geom_smooth(aes(color=fips_name),method="loess") +
-  coord_cartesian() +
+spggplt2<-ggplot(fips_added_lag_sum_by_year, aes(factor(year), (lagging_sum_by_year),fips_name)) +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
   ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \n for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("Total emission \n- previous years emssions \nfrom vehicle Based Sources")+
@@ -149,9 +118,7 @@ plot(spggplt2)
 ##facet plt
 
 ggsplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, lagging_sum_by_year)) +
-  geom_point()+  
-  geom_smooth(method="loess") +
-  coord_cartesian() +
+  geom_bar(aes(fill=fips_name),stat="identity",position="dodge") +
   ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \nfor each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("Total emission \n- previous \nyears emssions \nfrom vehicle \nBased Sources")+

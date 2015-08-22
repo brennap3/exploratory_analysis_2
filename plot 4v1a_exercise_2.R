@@ -63,7 +63,7 @@ emissions.by.year.coal
 
 ggplot4<-ggplot(emissions.by.year.coal, aes(factor(year), sum_by_year)) +
   geom_bar(stat="identity")+
-  ggtitle("Total emission from Coal Based Sources for each of the \nyears 1999, 2002, 2005, and 2008")+
+  ggtitle("Total emission from \nCoal Based Sources for each of the \nyears 1999, 2002, 2005, and 2008")+
   xlab("Year")+
   ylab("Total emission from Coal Based Sources")+
   theme_bw()

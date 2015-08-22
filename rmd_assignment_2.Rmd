@@ -1,0 +1,416 @@
+---
+title: "exploratory_analysis_Assignment_2"
+author: "Peter Brennan"
+date: "Saturday, August 22, 2015"
+output: html_document
+---
+
+**Introduction**
+
+Fine particulate matter (PM2.5) is an ambient air pollutant for which there is strong evidence that it is harmful to human health. In the United States, the Environmental Protection Agency (EPA) is tasked with setting national ambient air quality standards for fine PM and for tracking the emissions of this pollutant into the atmosphere. Approximatly every 3 years, the EPA releases its database on emissions of PM2.5. This database is known as the National Emissions Inventory (NEI). You can read more information about the NEI at the EPA National Emissions Inventory web site.
+
+For each year and for each type of PM source, the NEI records how many tons of PM2.5 were emitted from that source over the course of the entire year. The data that you will use for this assignment are for 1999, 2002, 2005, and 2008.
+
+**Assignment Aims**
+
+The aim of the assignment is to answer the following questions with the data. The aim is to address the following questions and tasks in your exploratory analysis. For each question/task you will need to make a single plot. Unless specified, you can use any plotting system in R to make your plot.
+
+1. Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+
+2. Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+3. Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? Which have seen increases in emissions from 1999-2008? Use the ggplot2 plotting system to make a plot answer this question.
+
+4. Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
+
+5. How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
+
+6. Compare emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037"). Which city has seen greater changes over time in motor vehicle emissions?
+
+
+**Types of Data**
+
+The data we are dealing with is on the whole aggregated PM 2.5 particulate matter summed by year and by different channel. As this data consists of :
+
+
+(A)largely aggregated PM2.5 particulate matter summed by year (Continuous)
+(B) Year (Discrete)
+(C) By channel it was created (Categorical)
+(d) by source of pollution (Categorical).
+
+
+**Tpes of graphs used:**
+
+The most appropriate graph types todisplay this data are bar graphs however where multiple  data types are displayed on the same graph line type charts were used.
+
+
+**Plot 1.** 
+
+Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+
+Type of graph: Bar plot
+
+Answer: From the graph it can be seen that from the 1999 to 2008 emissions have decreased
+
+![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot1v1a_exploratory_analysis_2.png)
+
+```{r, eval=FALSE}
+##some usefull links
+
+##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(magrittr)
+library(sqldf)
+library(gridExtra)
+library(cowplot)
+
+## This first line will likely take a few seconds. Be patient!
+
+NEI <- readRDS("C:\\Users\\Peter\\Documents\\summarySCC_PM25.rds")
+SCC <- readRDS("C:\\Users\\Peter\\Documents\\Source_Classification_Code.rds")
+
+str(SCC)
+summary(SCC)
+##plot1
+
+##Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Using the base plotting system, 
+##make a plot showing the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008.
+
+dplyr::glimpse(NEI)
+head(NEI)
+str(NEI)
+??xaxt
+emissions.by.year<-NEI %>% group_by(year) %>% summarize(sum_by_year=sum(Emissions)) %>% arrange(year) 
+png("plot1v1a_exploratory_analysis_2.png", width=480, height=480,res=120)  ##call it plot 1
+par(mfcol=c(1,1)) ##use one column and one row
+par(mar=c(5,5,4,4) + 0.2) ##set the margins
+barplot(emissions.by.year$sum_by_year,names=emissions.by.year$year, main="\n\n\nTotal PM2.5 emission\n from all sources for each of the \nyears 1999, 2002, 2005,\n and 2008", xlab="Year", ylab="\n\nTotal PM2.5\n emission \nfrom all sources",col="black",cex.main=0.65,cex.lab=0.65,cex.axis=0.65)
+dev.off()
+```
+
+**Plot 2.** 
+
+Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+Type of graph barplot
+Answer Yes they have, they fell in 2002 (when compared to 1999), the exception is in 2005 (when compared to 2002) when they rose but fell back again in 2008 (when compared to 2005).
+
+
+![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot2v1a_exploratory_analysis_2.png)
+
+```{r, eval=FALSE}
+##some usefull links
+
+##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(magrittr)
+library(sqldf)
+library(gridExtra)
+library(cowplot)
+
+
+
+NEI <- readRDS("summarySCC_PM25.rds")
+
+SCC <- readRDS("Source_Classification_Code.rds")
+
+
+##Plot 2
+
+
+##Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") 
+##from 1999 to 2008? Use the base plotting system to make a plot answering this question.
+
+str(NEI)
+
+emissions.by.year.baltimore<-NEI %>% filter(fips=="24510") %>% group_by(year) %>% summarize(sum_by_year=sum(Emissions)) %>% arrange(year)
+png("plot2v1a_exploratory_analysis_2.png", width=480, height=480,res=120)  ##call it plot 1
+par(mfcol=c(1,1)) ##use one column and one row
+par(mar=c(5,5,4,4) + 0.2) ##set the margins
+barplot(emissions.by.year.baltimore$sum_by_year,names=emissions.by.year.baltimore$year, main="Total PM2.5 emission \nfrom Baltimore for each of the \nyears 1999, 2002, 2005, and 2008",xlab="Year", ylab="\n\n\nTotal PM2.5 \nemission \nfrom all sources",col="black",cex.main=0.65,cex.lab=0.65,cex.axis=0.65)
+dev.off()
+##yes
+
+
+```
+
+**Plot 3.**
+
+Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
+Which have seen increases in emissions from 1999-2008? 
+
+Use the ggplot2 plotting system to make a plot answer this question.
+
+Type of chart grouped bar cahrt
+
+NONPOINT,NON-ROAD,ON-ROAD have fallen. Point has seen an increased from 1998 to 2008.
+The interesting thing about point is that is has has risen every interval in yeat except for 2008 were it fell back from 2005. Though it has seen an overall increase from 1999 to 2008. This is best seen by looking at the individual values in a table 
+
+  year|     type| Toal emission by year|
+  ----|---------|----------------------|
+  1999| NON-ROAD|   522.94000          |
+  1999| NONPOINT|  2107.62500          |
+  1999|  ON-ROAD|   346.82000          |
+  1999|    POINT|   296.79500          |
+  2002| NON-ROAD|   240.84692          |
+  2002| NONPOINT|  1509.50000          |
+  2002|  ON-ROAD|   134.30882          |
+  2002|    POINT|   569.26000          |
+  2005| NON-ROAD|   248.93369          |
+  2005| NONPOINT|  1509.50000          |
+  2005|  ON-ROAD|   130.43038          |
+  2005|    POINT|  1202.49000          |
+  2008| NON-ROAD|    55.82356          |
+  2008| NONPOINT|  1373.20731          |
+  2008|  ON-ROAD|    88.27546          |
+  2008|    POINT|   344.97518          |
+
+
+![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot3v1_exploratory_analysis_2.png)
+
+```{r, eval=FALSE}
+##Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, 
+##which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
+##Which have seen increases in emissions from 1999-2008? 
+##Use the ggplot2 plotting system to make a plot answer this question.
+
+##some usefull links
+
+##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(magrittr)
+library(sqldf)
+library(gridExtra)
+library(cowplot)
+
+
+##plot 3
+
+
+##Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, 
+##which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
+##Which have seen increases in emissions from 1999-2008? 
+##Use the ggplot2 plotting system to make a plot answer this question.
+
+NEI <- readRDS("summarySCC_PM25.rds")
+
+SCC <- readRDS("Source_Classification_Code.rds")
+
+emissions.by.year.type.baltimore<-NEI %>% filter(fips=="24510") %>% group_by(year,type) %>% summarize(sum_by_year=sum(Emissions)) %>% arrange(year)
+
+ggplot3<-ggplot(emissions.by.year.type.baltimore, aes(factor(year), sum_by_year,type)) +
+  geom_bar(aes(fill=type),stat="identity",position="dodge")  + ##geom_line(aes(color=type)) +
+  ##geom_smooth(aes(color=type),method="loess") +
+  ##coord_cartesian() +
+  ggtitle("Total PM2.5 emission\n from Baltimore for\n each of the \nyears 1999, 2002, 2005, and 2008 \nby type")+
+  xlab("Year")+
+  ylab("Total PM2.5 emission \nfrom all sources")+
+  theme_bw()
+
+plot(ggplot3)
+
+last_plot()
+
+ggsave("plot3v1_exploratory_analysis_2.png",width=6,height=6)
+
+```
+
+**Plot 4.**
+
+Across the United States, 
+how have emissions from coal combustion-related sources changed from 1999-2008?
+
+Type of plot Bar graph
+
+Assumptions made: Where the EI.Sector is like coal these SC's will be used to designate coal combustion sources
+
+Answer : Coal combustion sources have fallen from 1999 to 2008 however from 1998 to 2005 the values remained fairly steady but dramatically fell in 2008. This can be seen in both the table of values and the attached chart
+
+Year | Emissions due to coal|
+----------------------------|
+1999 |   572126.5           |
+2002 |    546789.2          |
+2005 |    552881.5          |
+2008 |    343432.2          |
+
+![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot4v1_exploratory_analysis_2.png)
+
+```{r, eval=FALSE}
+##Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, 
+##which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
+##Which have seen increases in emissions from 1999-2008? 
+##Use the ggplot2 plotting system to make a plot answer this question.
+
+##some usefull links
+
+##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(magrittr)
+library(sqldf)
+library(gridExtra)
+library(cowplot)
+library(data.table)
+
+
+##plot 4
+## plot Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
+## for it might be clearer using the following plot
+##there is a fair bit of preprocessing I get all the SCC's  that are like coal
+## i then checked them
+## I then got all emmssions by where the SCC contained these codes
+
+
+## This first line will likely take a few seconds. Be patient!
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+str(SCC)
+summary(SCC)
+
+str(NEI)
+summary(NEI)
+utils::View(SCC)
+
+library(data.table)
+DT<-data.table(SCC)
+DT[tolower(EI.Sector) %like% "coal",]
+##DT[tolower(EI.Sector) %like% "coal",SCC,EI.Sector] ##looks to be correct
+##SCC.COAL<- as.character(unique(DT[tolower(EI.Sector) %like% "coal",SCC])) ##see below its more neat
+SCC.Coal.MAGRIT <- DT[tolower(EI.Sector) %like% "coal",SCC] %>% unique()  %>% as.character()  
+##str(SCC.COAL)
+SCC.Coal.MAGRIT
+
+
+
+
+str(NEI)
+nrow(NEI)
+emissions.by.year.coal<-NEI %>% filter(SCC %in% SCC.Coal.MAGRIT ) %>% group_by(year) %>% summarize(sum_by_year=sum(Emissions)) %>% arrange(year)
+
+emissions.by.year.coal
+
+ggplot4<-ggplot(emissions.by.year.coal, aes(factor(year), sum_by_year)) +
+  geom_bar(stat="identity")+
+  ggtitle("Total emission from \nCoal Based Sources for each of the \nyears 1999, 2002, 2005, and 2008")+
+  xlab("Year")+
+  ylab("Total emission from Coal Based Sources")+
+  theme_bw()
+
+plot(ggplot4)
+
+last_plot()
+
+ggsave("plot4v1_exploratory_analysis_2.png",width=5,height=5)
+
+```
+
+
+
+**Plot 5.**
+
+Plot 5. How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
+
+Assumptions: Any data row with category on raod is considered to pertain to a motor vehicle.
+
+Chart Type: Bar graph
+
+Total emissions in Baltimore fell from 1998 to 2008 for motor vehicles in baltimore. This be seen from the cahrt below.
+
+
+![alt text](https://raw.githubusercontent.com/brennap3/exploratory_analysis_2/master/plot5v1_exploratory_analysis_2.png)
+
+
+```{r, eval=FALSE}
+
+##some usefull links
+
+##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+
+
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(magrittr)
+library(sqldf)
+library(gridExtra)
+library(cowplot)
+
+## This first line will likely take a few seconds. Be patient!
+
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+str(SCC)
+summary(SCC)
+##plot5
+
+##How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
+##they ahve fallen
+str(NEI)
+str(SCC)
+summary(NEI)
+utils::View(SCC)
+##we will assume that everything on the road is a motor vehicle
+##
+
+##DT[tolower(EI.Sector) %like% "vehicles"   ,SCC,EI.Sector] could use this
+
+emissions.by.year.motor.vehicles.baltimore<-NEI %>% filter(fips=="24510"&type=="ON-ROAD") %>% group_by(year) %>% summarize(sum_by_year=sum(Emissions)) %>% arrange(year)
+
+ggplot5<-ggplot(emissions.by.year.motor.vehicles.baltimore, aes(factor(year), sum_by_year)) +
+  geom_bar(stat="identity")+
+  ggtitle("Total emission from \nMotor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in Baltimore")+
+  xlab("Year")+
+  ylab("Total emission from vehicle Based Sources")+
+  theme_bw() ##substantaill fall
+
+plot(ggplot5)
+
+last_plot()
+
+ggsave("plot5v1_exploratory_analysis_2.png",width=5,height=5)
+
+
+```
