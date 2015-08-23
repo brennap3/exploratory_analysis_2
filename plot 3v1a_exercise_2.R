@@ -1,3 +1,9 @@
+##git hub respository is here: https://github.com/brennap3/exploratory_analysis_2
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.html
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.Rmd
+
+
+
 ##Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, 
 ##which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
 ##Which have seen increases in emissions from 1999-2008? 
@@ -43,11 +49,19 @@ ggplot3<-ggplot(emissions.by.year.type.baltimore, aes(factor(year), sum_by_year,
   ggtitle("Total PM2.5 emission\n from Baltimore for\n each of the \nyears 1999, 2002, 2005, and 2008 \nby type")+
   xlab("Year")+
   ylab("Total PM2.5 emission \nfrom all sources")+
-  theme_bw()
+  theme_bw()+
+  theme(plot.title = element_text(size = 4),
+        axis.title.x = element_text(size = 4),
+        axis.title.y = element_text(size = 4),
+        legend.title= element_text(size = 4),
+        axis.text.x= element_text(size = 4),
+        axis.text.y= element_text(size = 4),
+        legend.text= element_text(size = 4)
+  )
 
 plot(ggplot3)
 
 last_plot()
 
-ggsave("plot3v1_exploratory_analysis_2.png",width=6,height=6)
+ggsave("plot3v1_exploratory_analysis_2.png",width=8,height=8,units="cm")
 

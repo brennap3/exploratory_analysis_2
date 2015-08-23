@@ -1,6 +1,9 @@
-##Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, 
-##which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
-##Which have seen increases in emissions from 1999-2008? 
+##git hub respository is here: https://github.com/brennap3/exploratory_analysis_2
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.html
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.Rmd
+
+
+#Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
 ##Use the ggplot2 plotting system to make a plot answer this question.
 
 ##some usefull links
@@ -63,13 +66,21 @@ emissions.by.year.coal
 
 ggplot4<-ggplot(emissions.by.year.coal, aes(factor(year), sum_by_year)) +
   geom_bar(stat="identity")+
-  ggtitle("Total emission from \nCoal Based Sources for each of the \nyears 1999, 2002, 2005, and 2008")+
+  ggtitle("Total emission from \nCoal Based Sources \nfor each of the \nyears 1999, 2002, 2005, and 2008")+
   xlab("Year")+
-  ylab("Total emission from Coal Based Sources")+
-  theme_bw()
+  ylab("Total emission \nfrom Coal Based Sources")+
+  theme_bw()+
+  theme(plot.title = element_text(size = 4),
+        axis.title.x = element_text(size = 4),
+        axis.title.y = element_text(size = 4),
+        legend.title= element_text(size = 4),
+        axis.text.x= element_text(size = 4),
+        axis.text.y= element_text(size = 4),
+        legend.text= element_text(size = 4)
+  )
 
 plot(ggplot4)
 
 last_plot()
 
-ggsave("plot4v1_exploratory_analysis_2.png",width=5,height=5)
+ggsave("plot4v1_exploratory_analysis_2.png",width=9,height=9,units="cm")

@@ -1,3 +1,8 @@
+##git hub respository is here: https://github.com/brennap3/exploratory_analysis_2
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.html
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.Rmd
+
+
 ##some usefull links
 
 ##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/

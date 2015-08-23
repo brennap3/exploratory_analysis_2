@@ -1,12 +1,15 @@
 ##PLot6
-
+##git hub respository is here: https://github.com/brennap3/exploratory_analysis_2
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.html
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.Rmd
+##you are only interested in plot6v4_exploratory_analysis_2.png"
 ##some usefull links
 
 ##https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
 ##https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 ##https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 ##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
-##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
+##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-softwar...
 
 
 library(plyr)
@@ -90,9 +93,18 @@ spgglt1<-ggplot(fips_added, aes(factor(year), (sum_by_year),fips_name)) +
   ggtitle("Total emission from Motor_Vehicle Based Sources for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("Total emission from \nvehicle Based Sources")+
-  theme_bw() ##substantaill fall
-
-plot(spgglt1)
+  theme_bw() +  ##substantaill fall
+  theme(plot.title = element_text(size = 4),
+        axis.title.x = element_text(size = 4),
+        axis.title.y = element_text(size = 4),
+        legend.title= element_text(size = 4),
+        axis.text.x= element_text(size = 4),
+        axis.text.y= element_text(size = 4),
+        legend.text= element_text(size = 4)
+  )
+  
+  
+  plot(spgglt1)
 last_plot()
 
 ?lag
@@ -109,7 +121,15 @@ spggplt2<-ggplot(fips_added_lag_sum_by_year, aes(factor(year), (lagging_sum_by_y
   ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \n for each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("Total emission \n- previous years emssions \nfrom vehicle Based Sources")+
-  theme_bw() ##substantaill fall
+  theme_bw() +  ##substantaill fall
+  theme(plot.title = element_text(size = 4),
+        axis.title.x = element_text(size = 4),
+        axis.title.y = element_text(size = 4),
+        legend.title= element_text(size = 4),
+        axis.text.x= element_text(size = 4),
+        axis.text.y= element_text(size = 4),
+        legend.text= element_text(size = 4)
+  )
 
 plot(spggplt2)
 
@@ -122,14 +142,20 @@ ggsplt2<-ggplot(fips_added_lag_sum_by_year, aes(year, lagging_sum_by_year)) +
   ggtitle("Total emission from Motor_Vehicle Based Sources \n- previous years emission (if no previous year value is 0) \nfor each of the \nyears 1999, 2002, 2005, and 2008 in \nBaltimore(24510) and LA(06037)")+
   xlab("Year")+
   ylab("Total emission \n- previous \nyears emssions \nfrom vehicle \nBased Sources")+
-  theme_bw() ##substantaill fall
-
+  theme_bw() +  ##substantaill fall
+  theme(plot.title = element_text(size = 4),
+        axis.title.x = element_text(size = 4),
+        axis.title.y = element_text(size = 4),
+        legend.title= element_text(size = 4),
+        axis.text.x= element_text(size = 4),
+        axis.text.y= element_text(size = 4),
+        legend.text= element_text(size = 4)
+        )
 
 ggsplt2+facet_grid(fips_name ~.)
 
 ??plot_grid
 
 plot_grid(spgglt1,spggplt2, ncol=1,nrow=2)
-
-ggsave("plot6v4_exploratory_analysis_2.png",width=7,height=7) 
-
+##this is the plot you are interested in
+ggsave("plot6v4_exploratory_analysis_2.png",width=8,height=8,units="cm") 

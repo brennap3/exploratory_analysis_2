@@ -1,3 +1,8 @@
+##git hub respository is here: https://github.com/brennap3/exploratory_analysis_2
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.html
+##https://github.com/brennap3/exploratory_analysis_2/blob/master/rmd_assignment_2.Rmd
+
+
 
 ##some usefull links
 
@@ -7,6 +12,10 @@
 ##http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/
 ##http://www.sthda.com/english/wiki/ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page-r-software-and-data-visualization
 
+##How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
+##Upload a PNG file containing your plot addressing this question.
+
+##NOTE ASSUMPTIONS MADE ARE THAT  ANYTHING ONROAD ARE MOTOR VEHICLES
 
 library(plyr)
 library(dplyr)
@@ -27,7 +36,7 @@ summary(SCC)
 ##plot5
 
 ##How have emissions from motor vehicle sources changed from 1999-2008 in Baltimore City?
-##they ahve fallen
+##they have fallen
 str(NEI)
 str(SCC)
 summary(NEI)
@@ -41,13 +50,13 @@ emissions.by.year.motor.vehicles.baltimore<-NEI %>% filter(fips=="24510"&type=="
 
 ggplot5<-ggplot(emissions.by.year.motor.vehicles.baltimore, aes(factor(year), sum_by_year)) +
   geom_bar(stat="identity")+
-  ggtitle("Total emission from \nMotor_Vehicle Based Sources \nfor each of the \nyears 1999, 2002, 2005, and 2008 in Baltimore")+
+  ggtitle("Total emission from \nmotor vehicles\nfor each of the \nyears 1999, 2002, 2005, \nand 2008 in Baltimore")+
   xlab("Year")+
-  ylab("Total emission from vehicle Based Sources")+
+  ylab("Total emission \nfrom vehicle based sources")+
   theme_bw() ##substantaill fall
 
 plot(ggplot5)
 
 last_plot()
 
-ggsave("plot5v1_exploratory_analysis_2.png",width=5,height=5)
+ggsave("plot5v1_exploratory_analysis_2.png",width=8,height=8,units="cm")

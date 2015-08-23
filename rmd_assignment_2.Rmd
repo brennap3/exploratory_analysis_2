@@ -258,7 +258,7 @@ ggsave("plot3v1_exploratory_analysis_2.png",width=6,height=6)
 **Answer :** Coal combustion sources have fallen from 1999 to 2008 however from 1998 to 2005 the values remained fairly steady but dramatically fell in 2008. This can be seen in both the table of values and the attached chart
 
 Year | Emissions due to coal|
-----------------------------|
+-----|----------------------|
 1999 |   572126.5           |
 2002 |    546789.2          |
 2005 |    552881.5          |
